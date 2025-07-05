@@ -14,6 +14,7 @@
 #include <set>
 #include <stdexcept>
 #include <utility>
+#include "utils/log.h"
 
 using namespace KODI::WINDOWING::WAYLAND;
 
@@ -42,6 +43,10 @@ COutput::COutput(std::uint32_t globalName,
   };
   m_output.on_mode() = [this](const wayland::output_mode& flags, std::int32_t width,
                               std::int32_t height, std::int32_t refresh) {
+
+
+    CLog::LogF(LOGINFO, "XXX--XXX MODE_WIDTH: {}, MODE_HEIGHT: {}, MODE_REFRESH: {}", width, height, refresh);
+
     // std::set.emplace returns pair of iterator to the (possibly) inserted
     // element and boolean information whether the element was actually added
     // which we do not need
@@ -64,6 +69,7 @@ COutput::COutput(std::uint32_t globalName,
   };
   m_output.on_scale() = [this](std::int32_t scale)
   {
+    CLog::LogF(LOGINFO, "XXX--XXX SCALE: {}", scale);
     m_scale = scale;
   };
 

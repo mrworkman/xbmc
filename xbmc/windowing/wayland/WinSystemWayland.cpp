@@ -438,6 +438,7 @@ void CWinSystemWayland::UpdateResolutions()
 
   if (m_outputs.empty())
   {
+    CLog::LogF(LOGINFO, "DERP");
     // *Usually* this should not happen - just give up
     return;
   }
@@ -446,10 +447,12 @@ void CWinSystemWayland::UpdateResolutions()
   if (!output && m_lastSetOutput)
   {
     // Fallback to current output
+    CLog::LogF(LOGINFO, "FALLBACK");
     output = FindOutputByWaylandOutput(m_lastSetOutput);
   }
   if (!output)
   {
+    CLog::LogF(LOGINFO, "USE FIRST");
     // Well just use the first one
     output = m_outputs.begin()->second;
   }
@@ -630,6 +633,13 @@ bool CWinSystemWayland::ResizeWindow(int, int, int, int)
 
 bool CWinSystemWayland::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool)
 {
+  CLog::LogF(
+    LOGINFO,
+    "SetFullScreen(fullScreen: {}, screenWidth: {}, screenHeight: {}, width: {}, height: {})",
+    fullScreen,
+    res.iScreenWidth, res.iScreenHeight,
+    res.iWidth, res.iHeight
+  );
   return SetResolutionExternal(fullScreen, res);
 }
 
@@ -1171,6 +1181,7 @@ void CWinSystemWayland::OnSeatRemoved(std::uint32_t name)
 
 void CWinSystemWayland::OnOutputAdded(std::uint32_t name, wayland::proxy_t&& proxy)
 {
+  CLog::LogF(LOGINFO, "ON_OUTPUT_ADDED");
   wayland::output_t output(proxy);
   // This is not accessed from multiple threads
   m_outputsInPreparation.emplace(name, std::make_shared<COutput>(name, output, std::bind(&CWinSystemWayland::OnOutputDone, this, name)));

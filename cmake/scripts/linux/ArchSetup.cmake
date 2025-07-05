@@ -23,10 +23,15 @@ else()
     set(ARCH arm)
     set(NEON False)
     set(NEON_FLAGS "-mcpu=arm1176jzf-s -mtune=arm1176jzf-s -mfloat-abi=hard -mfpu=vfp")
+
+
   elseif(CPU MATCHES "cortex-a7")
     set(ARCH arm)
     set(NEON True)
-    set(NEON_FLAGS "-fPIC -mcpu=cortex-a7")
+#    set(NEON_FLAGS "-fPIC -mcpu=cortex-a7")
+    set(NEON_FLAGS "-fPIC")
+
+
   elseif(CPU MATCHES "cortex-a53")
     set(ARCH arm)
     set(NEON True)

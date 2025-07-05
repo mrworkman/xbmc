@@ -39,6 +39,7 @@ DEPENDS = \
   pythonmodule-pil \
   pythonmodule-pycryptodome \
   pythonmodule-setuptools \
+  qt5 \
   sqlite3 \
   tinyxml \
   udfread \
@@ -187,6 +188,7 @@ python3: expat gettext libxml2 sqlite3 openssl libffi bzip2 xz $(ICONV)
 pythonmodule-pil: bzip2 $(PYMODULE_DEPS) $(ZLIB) libjpeg-turbo libpng freetype2 python3 pythonmodule-setuptools
 pythonmodule-pycryptodome: $(PYMODULE_DEPS) python3 pythonmodule-setuptools
 pythonmodule-setuptools: $(PYMODULE_DEPS) python3
+qt5: wayland
 samba-gplv3: gnutls $(ZLIB)
 taglib: utf8-cpp $(ZLIB)
 wayland: expat libffi
